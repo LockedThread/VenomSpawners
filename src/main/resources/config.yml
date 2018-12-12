@@ -1,0 +1,18 @@
+got-no-money: '&c&l(!) &cYou dont have enough money to break this spawner!'
+broken-spawner: '&a&l(!) &aYou have successfully broken a {spawner} for ${cost}!'
+spawner-type:
+  pig: 25000.0
+  cow:  25000.0
+  chicken: 25000.0
+  creeper: 25000.0
+  cavespider: 25000.0
+  enderman: 25000.0
+  pig-zombie: 25000.0
+  villager: 25000.0
+  iron-golem: 25000.0
+  witch: 25000.0
+  zombie: 25000.0
+  skeleton: 25000.0
+  spider: 25000.0
+  blaze: 25000.0
+  sheep: 25000.0

@@ -1,0 +1,4 @@
+name: VenomSpawners
+main: org.venompvp.spawners.Spawners
+version: 1.0
+depend: [Venom]

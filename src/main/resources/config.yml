@@ -1,5 +1,7 @@
 got-no-money: '&c&l(!) &cYou dont have enough money to break this spawner!'
 broken-spawner: '&a&l(!) &aYou have successfully broken a {spawner} for ${cost}!'
+
+#Spawner prices by EntityType
 spawner-type:
   pig: 25000.0
   cow:  25000.0
@@ -16,3 +18,10 @@ spawner-type:
   spider: 25000.0
   blaze: 25000.0
   sheep: 25000.0
+
+#Items that won't be burnt or blown up
+blacklisted-item-destroy:
+- 'MOB_SPAWNER'
+- 'GOLDEN_APPLE'
+- 'BEACON'
+blacklist-diamond-armor: true

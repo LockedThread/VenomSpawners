@@ -4,10 +4,14 @@ import net.milkbowl.vault.economy.EconomyResponse;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.block.CreatureSpawner;
+import org.bukkit.entity.Entity;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.inventory.ItemStack;
 import org.venompvp.venom.module.Module;
 import org.venompvp.venom.module.ModuleInfo;
 import org.venompvp.venom.utils.Utils;
@@ -19,15 +23,16 @@ public class Spawners extends Module implements Listener {
     public void onEnable() {
         setupModule(this);
         getServer().getPluginManager().registerEvents(this, this);
-
-        getConfig().options().copyDefaults(true);
-        saveConfig();
+        saveDefaultConfig();
     }
 
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();
-        if (event.getBlock() != null && event.getBlock().getType() == Material.MOB_SPAWNER && !event.isCancelled() && Utils.canEdit(player, event.getBlock().getLocation())) {
+        if (event.getBlock() != null &&
+                event.getBlock().getType() == Material.MOB_SPAWNER &&
+                !event.isCancelled() &&
+                Utils.canEdit(player, event.getBlock().getLocation())) {
             CreatureSpawner creatureSpawner = (CreatureSpawner) event.getBlock().getState();
             final String path = "spawner-type." + creatureSpawner.getSpawnedType().name().toLowerCase().replace("_", "-");
             if (getConfig().isSet(path)) {
@@ -41,6 +46,28 @@ public class Spawners extends Module implements Listener {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("got-no-money")));
                     event.setCancelled(true);
                 }
+            }
+        }
+    }
+
+    @EventHandler
+    public void onEntityDamage(EntityDamageEvent event) {
+        Entity entity = event.getEntity();
+        if (entity instanceof Item && (event.getCause() == EntityDamageEvent.DamageCause.LAVA ||
+                event.getCause() == EntityDamageEvent.DamageCause.BLOCK_EXPLOSION ||
+                event.getCause() == EntityDamageEvent.DamageCause.ENTITY_EXPLOSION ||
+                event.getCause() == EntityDamageEvent.DamageCause.FIRE_TICK)) {
+            ItemStack itemStack = ((Item) entity).getItemStack();
+            if (getConfig().getBoolean("blacklist-diamond-armor")) {
+                if (itemStack.getType() == Material.DIAMOND_CHESTPLATE
+                        || itemStack.getType() == Material.DIAMOND_LEGGINGS
+                        || itemStack.getType() == Material.DIAMOND_BOOTS
+                        || itemStack.getType() == Material.DIAMOND_HELMET) {
+                    event.setCancelled(true);
+                }
+            }
+            if (getConfig().getStringList("blacklisted-item-destroy").contains(itemStack.getType().name())) {
+                event.setCancelled(true);
             }
         }
     }

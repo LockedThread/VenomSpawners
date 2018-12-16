@@ -45,8 +45,8 @@ public class Spawners extends Module implements Listener {
                 EconomyResponse economyResponse = getVenom().getEconomy().withdrawPlayer(player, cost);
                 if (economyResponse.transactionSuccess()) {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("broken-spawner")
-                            .replace("{spawner}", Utils.capitalizeEveryWord(creatureSpawner.getSpawnedType().name().replace("_", " ")
-                                    .replace("{cost}", String.valueOf(cost))))));
+                            .replace("{spawner}", Utils.capitalizeEveryWord(creatureSpawner.getSpawnedType().name().replace("_", " ")))
+                            .replace("{cost}", String.valueOf(cost))));
                 } else {
                     player.sendMessage(ChatColor.translateAlternateColorCodes('&', getConfig().getString("got-no-money")));
                     event.setCancelled(true);

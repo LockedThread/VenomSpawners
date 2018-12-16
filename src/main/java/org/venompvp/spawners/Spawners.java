@@ -37,7 +37,8 @@ public class Spawners extends Module implements Listener {
         if (event.getBlock() != null &&
                 event.getBlock().getType() == Material.MOB_SPAWNER &&
                 !event.isCancelled() &&
-                Utils.canEdit(player, event.getBlock().getLocation())) {
+                Utils.canEdit(player, event.getBlock().getLocation()) &&
+                !player.hasPermission("venom.spawnerbypass")) {
             CreatureSpawner creatureSpawner = (CreatureSpawner) event.getBlock().getState();
             final String path = "spawner-type." + creatureSpawner.getSpawnedType().name().toLowerCase().replace("_", "-");
             if (getConfig().isSet(path)) {

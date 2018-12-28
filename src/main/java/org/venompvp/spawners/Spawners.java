@@ -26,11 +26,6 @@ public class Spawners extends Module implements Listener {
         saveDefaultConfig();
     }
 
-    @Override
-    public void onDisable() {
-        disableCommands(this);
-    }
-
     @EventHandler
     public void onBlockBreak(BlockBreakEvent event) {
         Player player = event.getPlayer();

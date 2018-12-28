@@ -28,7 +28,7 @@ public class Spawners extends Module implements Listener {
 
     @Override
     public void onDisable() {
-        disableCommands();
+        disableCommands(this);
     }
 
     @EventHandler

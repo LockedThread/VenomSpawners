@@ -1,4 +1,5 @@
 name: VenomSpawners
+author: Simpleness
 main: org.venompvp.spawners.Spawners
 version: 1.0
 depend: [Venom]

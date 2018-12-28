@@ -16,7 +16,7 @@ import org.venompvp.venom.module.Module;
 import org.venompvp.venom.module.ModuleInfo;
 import org.venompvp.venom.utils.Utils;
 
-@ModuleInfo(name = "VenomSpawners", author = "LilProteinShake", description = "Breaking spawners costs money", version = "1.0")
+@ModuleInfo(name = "VenomSpawners", author = "Simpleness", description = "Breaking spawners costs money", version = "1.0")
 public class Spawners extends Module implements Listener {
 
     @Override
